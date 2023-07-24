@@ -1,0 +1,235 @@
+/**
+ * Array
+ */
+
+let a: number[] = [1, 2, 3];
+
+let b: string[] = ['a', 'b', 'c'];
+let d: Array<string> = ['a', 'b', 'c'];
+
+let c: (string | number)[] = [1, 2, 'a', 'b']
+
+type Airplane = {
+  model: string;
+  flightNumber: string;
+  timeOfDeparture: string;
+  from: string;
+  to: string;
+  seats: {
+    
+    [key: string ]: string 
+  };
+};
+
+type Airplanes = Airplane[];
+
+const airplanes: Airplanes = [
+  {
+    model: 'AIR178',
+    flightNumber: 'AR934',
+    timeOfDeparture: '01/05/2023',
+    from: 'BLR',
+    to: 'KDR',
+    seats: {
+      "10A": "Sham",
+      "10B": "Dharma"
+    }
+  },
+
+  {
+    model: 'AIR178',
+    flightNumber: 'AR934',
+    timeOfDeparture: '01/05/2023',
+    from: 'BLR',
+    to: 'KDR',
+    seats: {
+      "10A": "Sham",
+      "10B": "Dharma"
+    }
+  }  
+]
+
+/**
+ * Tuples
+ * 
+ *  - Special type of Arrays where the length of the array and type of each of the values in the array is defined
+ */
+
+// firstName, lastName, age
+let person1: [string, string, number?];
+
+person1 = ['John', 'Doe', 34];
+
+//[
+// NumberOfStudents: number,
+// passing: boolean,
+// 'john', 'Stella,
+//]
+
+type listOfStudents = [number, boolean, ...string[]];
+
+const passingStudents: listOfStudents = [3, true, 'Ram', 'Sham', 'Nem'];
+const failingStudents: listOfStudents = [1, false, 'Scott']
+
+/**
+ * Readonly Array 
+ * 
+ * - Array can be immutable By TS
+ * - In JS array can be mutable - it can change further
+ */
+
+let number: readonly number[] = [1, 3, 4, 5];
+
+// number.push(1); //Error push does not exist on type 'readonly number[]'
+
+/**
+ * null and undefined
+ * 
+ * undefined - something is not yet defined
+ * null - something not able to compute and run into a error
+ */
+
+let user: string;
+
+console.log(user)
+
+
+let saveButton1 = document.getElementById("save");
+console.log(saveButton); //null
+
+let loggedInUsername: string;
+
+const users = [
+  { name: 'Sham', age: 23 },
+  { name: 'Toby', age: 33 }
+];
+
+const loggedInUser = users.find((user: { age: number, name: string }) => user.name === loggedInUsername);
+
+// console.log(loggedInUser.age); //Error: 'loggedInUser' is Possibly 'undefined'
+
+let saveButton: HTMLElement = document.getElementById("saveBtn")!;
+let saveButton2: HTMLElement | null = document.getElementById("saveBtn");
+
+//should check
+if (saveButton !== null) {
+  //do something
+}
+
+
+/**
+ * Void and never type
+ * 
+ * void - assign to function which does return any value
+ */
+
+const addNumbers = (): void => {
+  console.log(2 + 4)
+};
+
+addNumbers();
+
+/**
+ * never - which never complete it also assign to func
+ */
+
+const throwNewError = (): never => {
+  throw new Error('Your program will terminate')
+}
+
+/**
+ * Enums
+ * 
+ * - used to enumarate datatypes
+ */
+
+// const roles = ['admin', 'author', 'user']
+
+enum Roles {
+  admin = 0,
+  author = 1,
+  user = 2
+}
+
+enum Roles1 {
+  admin = 'admin',
+  author = 'author',
+  user = 'editor'
+}
+
+type Person = {
+  name: string;
+  email: string;
+  password: string;
+  role: Roles1;
+};
+
+console.log(Roles.admin); //0
+console.log(Roles1.admin); // admin
+
+const personIno: Person = {
+  name: 'John',
+  email: 'Jhon@gmail.com',
+  password: '******',
+  role: Roles1.author,
+}
+
+// PRACTICE SESSION
+
+type TypeOfLibrary = 'national' | 'academic' | 'public'
+
+type Book = {
+  title: string;
+  pages: number;
+  isbn: string;
+} 
+
+type Member = {
+  name: string;
+  phone: string;
+  [key: string]: string;
+}
+
+
+
+
+type Library = {
+  name: string;
+  address: string;
+  numberOfBooks: number;
+  type: TypeOfLibrary;
+  books: Book[],
+  genres: string[],
+  members: Member[],
+}
+
+const library: Library = {
+  name: "New York Library",
+  address: " 24, Some Street, New York",
+  numberOfBooks: 1254,
+  type: "national", // 'national', 'academic', 'public'
+  books: [
+    {
+      title: "Harry Potter",
+      pages: 756,
+      isbn: "9971-5-0210-0",
+    },
+    {
+      title: "Davinci Code",
+      pages: 386,
+      isbn: "9971-5-0210-0",
+    },
+  ],
+  genres: ["fiction", "history", "computers", "poetry"],
+  members: [
+    {
+      name: "John Doe",
+      phone: "+167678978",
+    },
+    {
+      name: "Mark Doe", // Name is mandatory
+      phone: "+167678978", // Phone is mandatory
+      email: "mark@email.com", // Can have additional optional fields
+    },
+  ],
+};
